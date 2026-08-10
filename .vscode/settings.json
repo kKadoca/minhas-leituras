@@ -1,0 +1,38 @@
+{
+  // Escrita de prosa em texto puro.
+  "[plaintext]": {
+    "editor.wordWrap": "bounded",
+    "editor.wordWrapColumn": 90,
+    "editor.formatOnSave": false,
+    "editor.lineNumbers": "off",
+    "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "none",
+    "editor.quickSuggestions": false,
+    "editor.occurrencesHighlight": "off",
+    "editor.lineHeight": 1.7,
+    "editor.fontSize": 15
+  },
+
+  // Um parágrafo é uma linha só no arquivo; o wordWrap acima é só visual.
+  // Nada de formatador: qualquer coisa que reflowe parágrafo destrói os diffs.
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+
+  // Diffs palavra a palavra dentro do parágrafo.
+  "diffEditor.wordWrap": "on",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.renderSideBySide": false,
+
+  // Corretor ortográfico em português.
+  // Requer: streetsidesoftware.code-spell-checker
+  //       + streetsidesoftware.code-spell-checker-portuguese-brazilian
+  "cSpell.language": "pt,pt_BR,en",
+  "cSpell.enableFiletypes": ["plaintext"],
+
+  // Gramática e estilo em pt-BR.
+  // Requer: ltex-plus.vscode-ltex-plus
+  "ltex.language": "pt-BR",
+  "ltex.enabled": ["plaintext"],
+
+  "editor.rulers": []
+}

@@ -1,0 +1,4 @@
+[alias]
+	pd = diff --word-diff=plain --word-diff-regex='[^[:space:]]+'
+	ph = log -p --reverse --follow -U0 --word-diff=plain --word-diff-regex='[^[:space:]]+' --date=short --pretty=format:'%n=== %ad | %s ==='
+	rev = log --oneline -F --grep=[rev]

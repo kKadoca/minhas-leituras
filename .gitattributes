@@ -1,0 +1,3 @@
+# Trata .txt como texto e usa um regex de palavra que respeita acentuação.
+# Sem isso o --word-diff quebra "não" em pedaços na hora de comparar.
+*.txt diff=prosa

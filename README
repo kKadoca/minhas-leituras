@@ -1,0 +1,82 @@
+resenhas
+========
+
+Resenhas escritas DURANTE a leitura, não depois. O histórico do git é o ponto:
+cada commit é uma sessão, e os diffs mostram uma opinião se formando, virando
+e às vezes se provando errada.
+
+    livros/<slug>/resenha.txt    a resenha, revisada ao longo da leitura
+    livros/<slug>/meta.txt       gerado no fim, a partir dos diffs
+
+Texto puro, parágrafos corridos, sem markdown. O alvo é uma resenha de 6 a 8
+parágrafos, algo em torno de 700 palavras.
+
+
+ROTINA
+------
+
+    ./nova.sh duna "Duna" "Frank Herbert"   # cria e já commita
+    # ...lê, escreve, revisa...
+    git commit -am "duna: cap. 12-18 [rev]" # uma vez por sessão
+    ./meta.sh duna                          # com o livro fechado
+
+
+A ÚNICA REGRA QUE IMPORTA
+-------------------------
+
+Revise no lugar, não acrescente embaixo. Quando mudar de ideia, volte no
+parágrafo que está errado e reescreva ele. O par [-removido-]{+acrescentado+}
+no diff É o registro de você mudando de ideia. Se você só empilhar texto novo
+no fim, esse registro não existe e o meta.txt não tem do que falar.
+
+Um parágrafo por linha. Enter no FIM do parágrafo, sim; Enter no MEIO do
+parágrafo pra segurar a margem, não — isso desloca o texto todo e faz o git
+marcar o parágrafo inteiro como alterado, mesmo com --word-diff.
+
+O VS Code já está configurado pra desenhar o parágrafo em coluna de 90 na
+tela sem gravar quebra nenhuma no arquivo. Alt+Z liga e desliga isso: com a
+quebra visual desligada, um parágrafo tem que virar uma linha só que sai pela
+direita. Se ele continuar quebrado, tem Enter sobrando no meio.
+
+
+LENDO OS DIFFS VOCÊ MESMO
+-------------------------
+
+Diff normal marca o parágrafo inteiro. Os aliases ficam em .gitconfig, na
+raiz do repo. Para ativá-los, uma vez por clone:
+
+    git config --local include.path ../.gitconfig
+
+Eles não existem fora deste repositório.
+
+    git pd                                  o que mudou desde o último commit
+    git pd HEAD~3                            desde três sessões atrás
+    git ph livros/<slug>/resenha.txt         o histórico inteiro, em ordem
+    git rev                                  todas as vezes que mudei de ideia
+
+
+MENSAGENS DE COMMIT
+-------------------
+
+    <slug>: <onde parei> [marca] — <nota opcional>
+
+    duna: cap. 1-3
+    duna: cap. 12-18 [rev] — o Paul não é quem eu achava
+    ddia: p. 240-310
+    duna: cap. 22-fim [fim]
+    cripto: cap. 9 [larguei] — se repete
+
+Marcas: [rev] mudei de ideia, [fim] terminei, [larguei] abandonei, ou nada.
+A mensagem é lida pelo modelo depois, então é contexto, não burocracia.
+`git log --grep="\[rev\]"` te dá todas as viradas de uma vez.
+
+
+EXTENSÕES
+---------
+
+    streetsidesoftware.code-spell-checker
+    streetsidesoftware.code-spell-checker-portuguese-brazilian
+    ltex-plus.vscode-ltex-plus
+
+Já configuradas em .vscode/settings.json para pt-BR e para arquivos .txt.
+Nenhum formatador: qualquer coisa que reflowe parágrafo destrói os diffs.
